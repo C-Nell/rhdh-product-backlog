@@ -1,0 +1,69 @@
+# Example only. User refs and groups must match your RHDH catalog/Keycloak setup.
+leaveManagement:
+  enabled: true
+
+  database:
+    schema: leave_management
+
+  access:
+    # Users must be logged into RHDH and belong to one of these groups.
+    eligibleGroups:
+      - group:default/sass
+      - group:default/xbags
+
+    leaveAdminGroups:
+      - group:default/leave-admins
+
+  sections:
+    - name: SASS
+      memberGroups:
+        - group:default/sass
+      # These users receive SASS employee requests.
+      supervisorUserRefs:
+        - user:default/casey.park
+      # A supervisor's own request is sent here instead.
+      delegateApproverUserRef: user:default/section-chief
+
+    - name: XBAGS
+      memberGroups:
+        - group:default/xbags
+      supervisorUserRefs:
+        - user:default/morgan.lee
+      delegateApproverUserRef: user:default/section-chief
+
+  display:
+    defaultCalendarView: week
+    showPendingOnSupervisorCalendar: true
+    maxAttachmentSizeMb: 10
+    maxCommentLength: 500
+
+  notifications:
+    enabled: true
+    emailOnSubmit: true
+    emailOnDecision: true
+    inAppOnSubmit: true
+    inAppOnDecision: true
+
+  leaveTypes:
+    - Telework
+    - Annual
+    - Sick
+    - Admin
+    - TOA
+
+  noticeTypes:
+    - Scheduled
+    - Unscheduled
+
+  telework:
+    types:
+      - Ad Hoc
+      - Situational
+    exceptionCodes:
+      - TW-01
+      - TW-02
+
+  features:
+    attachmentsEnabled: true
+    setrValidationEnabled: true
+    employeeCancellationEnabled: true
