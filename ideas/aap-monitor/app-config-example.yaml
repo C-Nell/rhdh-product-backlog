@@ -1,0 +1,36 @@
+# Example only. Store the token in an OpenShift secret; do not commit a real token.
+aapMonitor:
+  enabled: true
+
+  aap:
+    baseUrl: https://aap.example.gov
+    token: ${AAP_MONITOR_TOKEN}
+
+  refresh:
+    # Frontend refresh rate when streaming is disabled.
+    intervalSeconds: 10
+
+    # When true, DevHub sends live updates to the browser using SSE.
+    streamingEnabled: false
+
+    # How often the DevHub backend checks AAP for new data in streaming mode.
+    aapPollIntervalSeconds: 5
+
+  display:
+    recentRunsLimit: 25
+    logLineLimit: 100
+    showOpenInAapLink: true
+
+  templates:
+    - id: 42
+      type: workflow
+      displayName: RHEL 9 Server Build
+    - id: 57
+      type: workflow
+      displayName: Windows Server Build
+    - id: 81
+      type: workflow
+      displayName: Server Decommission
+    - id: 96
+      type: job
+      displayName: Patch Deployment
